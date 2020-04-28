@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -45,7 +46,8 @@ class App extends Component {
 
   render () {
     const style ={
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1x solid blue',
       padding: '8px',
@@ -68,12 +70,21 @@ class App extends Component {
           </div>
          
       );
+      style.backgroundColor = 'red';
+    }
+    
+    const classes = [];
+    if(this.state.persons.length <= 2){
+      classes.push('red'); //classes=['red']
+    }
+    if(this.state.persons.length <= 1){
+      classes.push('bold'); //classes=['red','bold']
     }
 
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
-        
+        <p className={classes.join(' ')}> working </p> 
         <button
         style={style} 
         onClick={this.togglePersonsHandler}>Ocultar/Mostrar personas</button>
@@ -84,32 +95,8 @@ class App extends Component {
   }
 
 
-    /*switchNameHandler = (newName) => {
-    // console.log('Was clicked!');
-    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
-    this.setState( {
-      persons: [
-        { name: newName, age: 28 },
-        { name: 'Manu', age: 29 },
-        { name: 'Stephanie', age: 27 }
-      ]
-    } )
-  }*/
-
-  /*nameChangedHandler = (event) => {
-    this.setState( {
-      persons: [
-        { name: 'Max', age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: 'Stephanie', age: 26 }
-      ]
-    } )
-  }*/
-
-
-
 }
 
 
 
-export default App;
+export default Radium(App);
